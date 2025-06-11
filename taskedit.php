@@ -26,7 +26,7 @@
 
  <button type="submit">保存</button><a href="">キャンセル</a>
  
-sdftyguih
+
  </form>
 
 </body>
