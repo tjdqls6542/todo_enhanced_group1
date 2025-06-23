@@ -13,7 +13,7 @@
         <p>ユーザー名またはパスワードが間違っています。</p>
     <?php endif; ?>
 
-    <form action="check.php" method="post">
+    <form action="db.php" method="post">
         <label>ユーザー名: <input type="text" name="username" value="たろう"></label><br><br>
         <label>パスワード: <input type="password" name="password" value="aso111"></label><br><br>
         <input type="submit" name="login" value="ログイン">
