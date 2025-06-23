@@ -16,7 +16,7 @@ if(isset($_POST['login'])){
         if ($user) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username']; // ログイン状態を保持したい場合
-            header("Location: form.php");
+            header("Location: index.php");
             exit;
         } else {
             header("Location: login.php?error=1");
