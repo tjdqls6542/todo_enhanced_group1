@@ -17,6 +17,8 @@
         <label>ユーザー名: <input type="text" name="username" value="たろう"></label><br><br>
         <label>パスワード: <input type="password" name="password" value="aso111"></label><br><br>
         <input type="submit" value="ログイン">
+
+        <p><a href="register.php">▶ 新規登録</a></p>
     </form>
 </body>
 </html>
