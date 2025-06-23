@@ -1,4 +1,4 @@
- <?php session_start(); ?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -12,7 +12,6 @@
         <label>ユーザー名: <input type="text" name="username" value="たろう"></label><br><br>
         <label>パスワード: <input type="password" name="password" value="aso111"></label><br><br>
         <input type="submit" name="register" value="登録">
-
         <p><a href="login.php">▶ ログインはこちら</a></p>
     </form>
 </body>
