@@ -19,6 +19,5 @@
     </form>
 
     <p><a href="register.php">▶ 新規登録</a></p>
-    <p><a href="logout.php">▶ ログアウト</a></p>
 </body>
 </html>
