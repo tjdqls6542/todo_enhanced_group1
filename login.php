@@ -1,5 +1,4 @@
 <?php session_start(); ?>
-<?php //前のlogin.phpと一緒?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
