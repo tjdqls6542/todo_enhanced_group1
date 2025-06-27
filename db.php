@@ -7,27 +7,39 @@ $pdo = new PDO(
     'Pass0620'
 );
 
-if(isset($_POST['login'])){
-    $sql = $pdo->prepare('SELECT * FROM users WHERE username = ? AND password = ?');
-    $sql->execute([$_POST['username'], $_POST['password']]);
+if (isset($_POST['login'])) {
+    // ログイン処理
+    $sql = $pdo->prepare('SELECT * FROM users WHERE username = ?');
+    $sql->execute([$_POST['username']]);
+    $user = $sql->fetch();
 
-    $user = $sql->fetch(); // 一行だけ取得
+    if ($user && password_verify($_POST['password'], $user['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        header("Location: index.php");
+        exit;
+    } else {
+        header("Location: login.php?error=1");
+        exit;
+    }
 
-        if ($user) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username']; // ログイン状態を保持したい場合
-            header("Location: index.php");
-            exit;
-        } else {
-            header("Location: login.php?error=1");
-            exit;
-        }
+} elseif (isset($_POST['register'])) {
+    // 新規登録処理
+    $username = $_POST['username'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-} else if(isset($_POST['register'])){
+    // ユーザー名重複チェック（任意）
+    $check = $pdo->prepare('SELECT COUNT(*) FROM users WHERE username = ?');
+    $check->execute([$username]);
+    if ($check->fetchColumn() > 0) {
+        echo "このユーザー名は既に使われています。<br><a href='register.php'>戻る</a>";
+        exit;
+    }
+
     $sql = $pdo->prepare('INSERT INTO users (username, password) VALUES (?, ?)');
-    $sql->execute([$_POST['username'], $_POST['password']]);
-    
-    header("Location: register.php");
+    $sql->execute([$username, $password]);
+
+    header("Location: login.php");
     exit;
 }
 ?>
