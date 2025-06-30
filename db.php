@@ -13,7 +13,7 @@ if (isset($_POST['login'])) {
     $sql->execute([$_POST['username']]);
     $user = $sql->fetch();
 
-    if ($user && password_hash($_POST['password'], $user['password'])) {
+    if ($user && password_verify($_POST['password'], $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         header("Location: index.php");
