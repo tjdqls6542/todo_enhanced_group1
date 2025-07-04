@@ -84,7 +84,7 @@ $task = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <td>
                     <form action="update_status.php" method="post">
                         <input type="hidden" name="id" value="<?= $t['id'] ?>">
-                        <input type="checkbox" name="status" value="完了" <?= $t['status'] === '完了' ? 'checked' : '' ?> onchange="this.form.submit();">
+                        <input type="checkbox" name="status" value="done" <?= $t['status'] === 'done' ? 'checked' : '' ?> onchange="this.form.submit();">
                     </form>
                 </td>
                 <td><?= htmlspecialchars($t['task']) ?></td>

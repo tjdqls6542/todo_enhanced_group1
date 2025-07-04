@@ -12,7 +12,7 @@ $message = "";
 
 // フォームが送信されたときの処理
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task_add'])) {
-    $task_name = trim($_POST['task_name']);
+    $task = trim($_POST['task']);
     $due_date = $_POST['due_date'];
     $priority = $_POST['priority'] !== '' ? $_POST['priority'] : '中';
 
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task_add'])) {
         $stmt = $pdo->prepare("INSERT INTO todos (user_id, task, due_date, priority, status) VALUES (?, ?, ?, ?, 'todo')");
         $stmt->execute([
             $_SESSION['user_id'],
-            $task_name,
+            $task,
             $due_date,
             $priority
         ]);
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task_add'])) {
     <?php endif; ?>
 
     <form action="task_add.php" method="post">
-        <input type="text" name="task_name" placeholder="タスク内容" required>
+        <input type="text" name="task" placeholder="タスク内容" required>
         <input type="date" name="due_date" required>
         <select name="priority">
             <option value="">優先度(全て)</option>
