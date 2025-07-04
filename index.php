@@ -10,6 +10,8 @@
  
     <!-- タスク追加フォーム -->
     <section>
+        <iframe src="task_add.php" width="100%" height="100" frameborder="0"></iframe>
+
         <form action="task_add.php" method="post">
             <input type="text" name="task_name" placeholder="タスク内容" required>
 
@@ -29,6 +31,8 @@
 
     <!-- タスク検索フォーム -->
     <section>
+        <iframe src="search.php" width="100%" height="100" frameborder="0"></iframe>
+
         <form action="task_search.php" method="get">
             <input type="text" name="task_name_keyword" placeholder="キーワード">
 
