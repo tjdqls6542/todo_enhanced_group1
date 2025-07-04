@@ -7,7 +7,7 @@
     <style>
         iframe {
             width: 100%;
-            height: 150px;
+            height: 100px;
             border: 2px solid #aaa;
             border-radius: 5px;
             margin-bottom: 20px;
