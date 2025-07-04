@@ -13,9 +13,11 @@ $pdo = new PDO(
     'Pass0620'
 );
 
-$stmt = $pdo->query("SELECT * FROM task ORDER BY due_date ASC");
+$stmt = $pdo->prepare("SELECT * FROM task WHERE user_id = ? ORDER BY due_date ASC");
+$stmt->execute([$_SESSION['user_id']]);
 $task = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
