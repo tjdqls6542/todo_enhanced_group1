@@ -32,6 +32,18 @@ $task = $stmt->fetchAll(PDO::FETCH_ASSOC);
             border-radius: 5px;
             margin-bottom: 20px;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
     </style>
 </head>
 <body>
@@ -40,7 +52,6 @@ $task = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <p><?= htmlspecialchars($_SESSION['username']) ?>さん
         <a href="logout.php">ログアウト</a>
     </p>
-
 
     <!-- タスク追加フォーム -->
     <section>
@@ -52,32 +63,41 @@ $task = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <iframe src="search.php" title="タスク検索"></iframe>
     </section>
 
-<!-- タスクリスト -->
-<table>
-    <thead>
-        <tr>
-            <th>状態</th>
-            <th>タスク</th>
-            <th>期限</th>
-            <th>優先度</th>
-            <th>操作</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($task as $t): ?>
-        <tr>
-            <td><input type="checkbox" <?= $t['status'] === '完了' ? 'checked' : '' ?>></td>
-            <td><?= htmlspecialchars($t['task']) ?></td>
-            <td><?= htmlspecialchars($t['due_date']) ?></td>
-            <td><?= htmlspecialchars($t['priority']) ?></td>
-            <td>
-                <a href="edit.php?id=<?= $t['id'] ?>">編集</a>
-                <a href="delete.php?id=<?= $t['id'] ?>" onclick="return confirm('本当に削除しますか？');">削除</a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+    <!-- タスクリスト -->
+    <table>
+        <thead>
+            <tr>
+                <th>状態</th>
+                <th>タスク</th>
+                <th>期限</th>
+                <th>優先度</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (count($task) === 0): ?>
+                <tr><td colspan="5">タスクがありません</td></tr>
+            <?php endif; ?>
+
+            <?php foreach ($task as $t): ?>
+            <tr>
+                <td>
+                    <form action="update_status.php" method="post">
+                        <input type="hidden" name="id" value="<?= $t['id'] ?>">
+                        <input type="checkbox" name="status" value="完了" <?= $t['status'] === '完了' ? 'checked' : '' ?> onchange="this.form.submit();">
+                    </form>
+                </td>
+                <td><?= htmlspecialchars($t['task']) ?></td>
+                <td><?= htmlspecialchars($t['due_date']) ?></td>
+                <td><?= htmlspecialchars($t['priority']) ?></td>
+                <td>
+                    <a href="edit.php?id=<?= $t['id'] ?>">編集</a>
+                    <a href="delete.php?id=<?= $t['id'] ?>" onclick="return confirm('本当に削除しますか？');">削除</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 
 </body>
 </html>
