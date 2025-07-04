@@ -41,41 +41,30 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['username'])) {
         <iframe src="search.php" title="タスク検索"></iframe>
     </section>
 
-<table border="1" cellpadding="10" cellspacing="0">
+<!-- タスクリスト -->
+<table>
     <thead>
         <tr>
-            <th>ID</th>
-            <th>タスク内容</th>
             <th>状態</th>
-            <th>優先度</th>
+            <th>タスク</th>
             <th>期限</th>
+            <th>優先度</th>
             <th>操作</th>
         </tr>
     </thead>
     <tbody>
+        <?php foreach ($tasks as $task): ?>
         <tr>
-            <td>1</td>
-            <td>買い物に行く</td>
-            <td>未完了</td>
-            <td>高</td>
-            <td>2025-07-10</td>
+            <td><input type="checkbox" <?= $task['state'] === '完了' ? 'checked' : '' ?>></td>
+            <td><?= htmlspecialchars($task['task_name']) ?></td>
+            <td><?= htmlspecialchars($task['due_date']) ?></td>
+            <td><?= htmlspecialchars($task['priority']) ?></td>
             <td>
-                <button>完了にする</button>
-                <button>削除</button>
+                <a href="edit.php?id=<?= $task['id'] ?>">編集</a>
+                <a href="delete.php?id=<?= $task['id'] ?>" onclick="return confirm('本当に削除しますか？');">削除</a>
             </td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td>レポート提出</td>
-            <td>完了</td>
-            <td>中</td>
-            <td>2025-07-05</td>
-            <td>
-                <button disabled>完了</button>
-                <button>削除</button>
-            </td>
-        </tr>
-        <!-- ここにPHPで繰り返し表示していく -->
+        <?php endforeach; ?>
     </tbody>
 </table>
 
