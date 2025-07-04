@@ -6,6 +6,15 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['username'])) {
     header("Location: login.php");
     exit;
 }
+
+$pdo = new PDO(
+    'mysql:host=mysql320.phy.lolipop.lan;dbname=LAA1554158-todo;charset=utf8',
+    'LAA1554158',
+    'Pass0620'
+);
+
+$stmt = $pdo->query("SELECT * FROM task ORDER BY due_date ASC");
+$tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -53,15 +62,15 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['username'])) {
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($tasks as $task): ?>
+        <?php foreach ($task as $t): ?>
         <tr>
-            <td><input type="checkbox" <?= $task['state'] === '完了' ? 'checked' : '' ?>></td>
-            <td><?= htmlspecialchars($task['task_name']) ?></td>
-            <td><?= htmlspecialchars($task['due_date']) ?></td>
-            <td><?= htmlspecialchars($task['priority']) ?></td>
+            <td><input type="checkbox" <?= $t['status'] === '完了' ? 'checked' : '' ?>></td>
+            <td><?= htmlspecialchars($t['task']) ?></td>
+            <td><?= htmlspecialchars($t['due_date']) ?></td>
+            <td><?= htmlspecialchars($t['priority']) ?></td>
             <td>
-                <a href="edit.php?id=<?= $task['id'] ?>">編集</a>
-                <a href="delete.php?id=<?= $task['id'] ?>" onclick="return confirm('本当に削除しますか？');">削除</a>
+                <a href="edit.php?id=<?= $t['id'] ?>">編集</a>
+                <a href="delete.php?id=<?= $t['id'] ?>" onclick="return confirm('本当に削除しますか？');">削除</a>
             </td>
         </tr>
         <?php endforeach; ?>
