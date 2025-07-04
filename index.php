@@ -7,7 +7,7 @@
     <style>
         iframe {
             width: 100%;
-            height: 200px;
+            height: 150px;
             border: 2px solid #aaa;
             border-radius: 5px;
             margin-bottom: 20px;
@@ -19,13 +19,11 @@
 
     <!-- タスク追加フォーム -->
     <section>
-        <h2>タスク追加</h2>
         <iframe src="task_add.php" title="タスク追加"></iframe>
     </section>
 
     <!-- タスク検索フォーム -->
     <section>
-        <h2>タスク検索</h2>
         <iframe src="search.php" title="タスク検索"></iframe>
     </section>
 </body>
