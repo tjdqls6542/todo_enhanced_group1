@@ -27,6 +27,8 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['username'])) {
     
     <h1>ToDoリスト</h1>
     <p><?= htmlspecialchars($_SESSION['username']) ?>さん
+        <a href="logout.php">ログアウト</a>
+    </p>
 
 
     <!-- タスク追加フォーム -->
