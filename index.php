@@ -14,7 +14,7 @@ $pdo = new PDO(
 );
 
 $stmt = $pdo->query("SELECT * FROM task ORDER BY due_date ASC");
-$tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$task = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
