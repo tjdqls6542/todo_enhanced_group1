@@ -13,8 +13,8 @@
     <?php endif; ?>
 
     <form action="db.php" method="post">
-        <label>ユーザー名: <input type="text" name="username" required></label><br><br>
-        <label>パスワード: <input type="password" name="password" required></label><br><br>
+        <label>ユーザー名: <input type="text" name="username" value="たろう" required></label><br><br>
+        <label>パスワード: <input type="password" name="password" value="aso111" required></label><br><br>
         <input type="submit" name="login" value="ログイン">
     </form>
 
