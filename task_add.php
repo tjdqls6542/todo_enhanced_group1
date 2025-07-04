@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task_add'])) {
         );
 
         // データ追加（INSERT）
-        $stmt = $pdo->prepare("INSERT INTO todos (user_id, task, due_date, priority, status) VALUES (?, ?, ?, ?, '未完了')");
+        $stmt = $pdo->prepare("INSERT INTO todos (user_id, task, due_date, priority, status) VALUES (?, ?, ?, ?, 'todo')");
         $stmt->execute([
             $_SESSION['user_id'],
             $task_name,
