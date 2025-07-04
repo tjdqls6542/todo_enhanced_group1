@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// ログインチェック
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -15,7 +24,10 @@
     </style>
 </head>
 <body>
+    
     <h1>ToDoリスト</h1>
+    <p><?= htmlspecialchars($_SESSION['username']) ?>さん
+
 
     <!-- タスク追加フォーム -->
     <section>
