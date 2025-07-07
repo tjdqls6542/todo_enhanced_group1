@@ -59,10 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task_add'])) {
         <input type="text" name="task" placeholder="タスク内容" required>
         <input type="date" name="due_date" required>
         <select name="priority">
-            <option value="">優先度(全て)</option>
-            <option value="低">低</option>
-            <option value="中">中</option>
-            <option value="高">高</option>
+            <option value="1">優先度(低)</option>
+            <option value="2">中</option>
+            <option value="3">高</option>
         </select>
         <input type="submit" name="task_add" value="追加">
     </form>

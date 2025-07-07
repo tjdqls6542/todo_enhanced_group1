@@ -1,29 +1,19 @@
-<!DOCTYPE html>
- <html lang="ja">
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>フィルタ/検索</title>
- </head>
- <body>
-    <h3>フィルタ/検索</h3>
-        <input type="text" name="task_name_keyword" placeholder="キーワード" required>
- 
-        <select id="state" name="state">
-            <option value="すべて">すべて</option>
-            <option value="完了">完了</option>
-            <option value="未完了">未完了</option>
-        </select>
-       
-        <select id="priority" name="priority">
-            <option value="低">優先度(全て)</option>
-            <option value="低">低</option>
-            <option value="中">中</option>
-            <option value="高">高</option>
-        </select>
- 
-        <input type="submit" name="task_add" value="適用">
-       
+<h3>フィルタ/検索</h3>
+<form action="index.php" method="get" target="_parent">
+    <input type="text" name="task_name_keyword" placeholder="キーワード" value="<?= htmlspecialchars($_GET['task_name_keyword'] ?? '') ?>">
 
- </body>
- </html>
+    <select id="state" name="state">
+        <option value="" <?= (!isset($_GET['state']) || $_GET['state'] === '') ? 'selected' : '' ?>>すべて</option>
+        <option value="done" <?= (isset($_GET['state']) && $_GET['state'] === 'done') ? 'selected' : '' ?>>完了</option>
+        <option value="todo" <?= (isset($_GET['state']) && $_GET['state'] === 'todo') ? 'selected' : '' ?>>未完了</option>
+    </select>
+
+    <select id="priority" name="priority">
+        <option value="" <?= (!isset($_GET['priority']) || $_GET['priority'] === '') ? 'selected' : '' ?>>優先度(すべて)</option>
+        <option value="1" <?= (isset($_GET['priority']) && $_GET['priority'] === '1') ? 'selected' : '' ?>>低</option>
+        <option value="2" <?= (isset($_GET['priority']) && $_GET['priority'] === '2') ? 'selected' : '' ?>>中</option>
+        <option value="3" <?= (isset($_GET['priority']) && $_GET['priority'] === '3') ? 'selected' : '' ?>>高</option>
+    </select>
+
+    <input type="submit" name="search" value="適用">
+</form>

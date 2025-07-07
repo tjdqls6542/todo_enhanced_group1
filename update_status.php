@@ -1,23 +1,34 @@
 <?php
 session_start();
 
+// ログインチェック
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
 
-// DB接続
-$pdo = new PDO(
-    'mysql:host=mysql320.phy.lolipop.lan;dbname=LAA1554158-todo;charset=utf8',
-    'LAA1554158',
-    'Pass0620'
-);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = $_POST['id'];
 
-// チェックがある＝完了、ない＝未完了
-$status = isset($_POST['status']) ? 'done' : 'todo';
+    // チェックされていれば 'done'、されていなければ 'todo'
+    $status = (isset($_POST['status']) && $_POST['status'] === 'done') ? 'done' : 'todo';
 
-$stmt = $pdo->prepare("UPDATE todos SET status = ? WHERE id = ? AND user_id = ?");
-$stmt->execute([$status, $_POST['id'], $_SESSION['user_id']]);
+    try {
+        $pdo = new PDO(
+            'mysql:host=mysql320.phy.lolipop.lan;dbname=LAA1554158-todo;charset=utf8',
+            'LAA1554158',
+            'Pass0620',
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+        );
+
+        $stmt = $pdo->prepare("UPDATE todos SET status = ? WHERE id = ? AND user_id = ?");
+        $stmt->execute([$status, $id, $_SESSION['user_id']]);
+
+    } catch (PDOException $e) {
+        echo "エラー：" . $e->getMessage();
+        exit;
+    }
+}
 
 header("Location: index.php");
 exit;
